@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Login</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="4" offset-lg="4">
+        <form [formGroup]="loginForm" (ngSubmit)="login()">
+          <ion-list>
+            <ion-item>
+              <ion-label position="floating">Email</ion-label>
+              <ion-input formControlName="email" type="email"></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-label position="floating">Password</ion-label>
+              <ion-input formControlName="password" type="password"></ion-input>
+            </ion-item>
+          </ion-list>
+
+          <ion-button expand="full" type="submit" [disabled]="loginForm.invalid">Login</ion-button>
+          <ion-button expand="block" fill="clear" routerLink="/forgot-password">Forgot Password?</ion-button>
+        </form>
+        <ion-button expand="block" color="danger" (click)="signInWithGoogle()">
+          <ion-icon name="logo-google" slot="start"></ion-icon>
+          Sign in with Google
+        </ion-button>
+        <ion-button expand="block" color="primary" (click)="signInWithFacebook()">
+          <ion-icon name="logo-facebook" slot="start"></ion-icon>
+          Sign in with Facebook
+        </ion-button>
+        <div class="signup">
+          <p>Don't have an account? <a routerLink="/register">Sign up</a></p>
+        </div>
+      </ion-col>
+    </ion-row>
+
+  </ion-grid>
+
+</ion-content>
