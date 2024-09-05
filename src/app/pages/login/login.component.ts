@@ -7,6 +7,7 @@ import {Router, RouterLink} from "@angular/router";
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import {AuthService} from "../../core/services/auth/auth.service";
+import {UserService} from "../../core/services/user/user.service";
 
 @Component({
   selector: 'app-login',
@@ -28,7 +29,8 @@ export class LoginComponent implements OnInit {
     private navCtrl: NavController,
     private loadingCtrl: LoadingController,
     private toastCtrl: ToastController,
-    private router: Router
+    private router: Router,
+    private userService: UserService,
   ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -37,7 +39,11 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log("ajunge aici");
+    this.userService.currentUser$.subscribe(user => {
+      if (user) {
+        this.router.navigate(['/dashboard']);
+      }
+    });
   }
 
   async login() {

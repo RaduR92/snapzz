@@ -7,8 +7,8 @@
   <ion-content class="ion-padding">
     <ion-list>
       <ion-item>Menu Item 1</ion-item>
-      <ion-item>Menu Item 2</ion-item>
-      <ion-item>Menu Item 3</ion-item>
+      <ion-item (click)="navigateToQRCode()">Create your QR Code</ion-item>
+      <ion-item (click)="navigateToUpload()">Upload</ion-item>
       <ion-item (click)="navigateToProfile()">Profile</ion-item>
       <ion-item (click)="logout()">Logout</ion-item>
     </ion-list>
@@ -26,6 +26,7 @@
   <ion-content class="ion-padding">
     <h1>Welcome to your dashboard!</h1>
     <p *ngIf="currentUser">Hello, {{ currentUser.displayName || currentUser.email }}!</p>
+    <p *ngIf="currentUserStorageSize">You have used {{currentUserStorageSize}} of your account.</p>
     <!-- Add your dashboard content here -->
   </ion-content>
 </div>

@@ -9,7 +9,7 @@ import {provideFirebaseApp, initializeApp} from "@angular/fire/app";
 import {provideHttpClient} from "@angular/common/http";
 import {IonicModule} from "@ionic/angular";
 import {environment} from "./environments/environment";
-import {getAuth, provideAuth} from "@angular/fire/auth";
+import {getAuth, initializeAuth, provideAuth, browserLocalPersistence} from "@angular/fire/auth";
 import {FIREBASE_OPTIONS} from "@angular/fire/compat";
 
 bootstrapApplication(AppComponent, {
@@ -20,7 +20,14 @@ bootstrapApplication(AppComponent, {
     provideHttpClient(),
     importProvidersFrom(IonicModule.forRoot()),
     provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
-    provideAuth(() => getAuth()),
+    provideAuth(() => {
+      const auth = getAuth();
+      initializeAuth(auth.app, {
+        persistence: browserLocalPersistence,
+        popupRedirectResolver: undefined,
+      });
+      return auth;
+    }),
     { provide: FIREBASE_OPTIONS, useValue: environment.firebaseConfig },
   ],
 });
