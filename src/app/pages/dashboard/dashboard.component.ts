@@ -13,6 +13,7 @@ import {CommonModule} from "@angular/common";
 })
 export class DashboardComponent implements OnInit {
   currentUser: User | null = null;
+  currentUserStorageSize: string = '';
 
   constructor(
     private authService: AuthService,
@@ -23,7 +24,20 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     this.userService.currentUser$.subscribe(user => {
       this.currentUser = user;
+      this.currentUserStorageSize = this.formatBytes((user && user.storageSize) ? user.storageSize : 0);
     });
+  }
+
+  formatBytes(bytes: number, decimals = 2) {
+    if (!+bytes) return '0 Bytes'
+
+    const k = 1024
+    const dm = decimals < 0 ? 0 : decimals
+    const sizes = ['Bytes', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB']
+
+    const i = Math.floor(Math.log(bytes) / Math.log(k))
+
+    return `${parseFloat((bytes / Math.pow(k, i)).toFixed(dm))} ${sizes[i]}`
   }
 
   async logout() {
@@ -38,6 +52,14 @@ export class DashboardComponent implements OnInit {
 
   navigateToProfile() {
     this.router.navigate(['/profile']);
+  }
+
+  navigateToUpload() {
+    this.router.navigate(['/upload']);
+  }
+
+  navigateToQRCode() {
+    this.router.navigate(['/create-qr-code']);
   }
 }
 
