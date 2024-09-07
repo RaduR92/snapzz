@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Photo Gallery</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      @if (images | async; as imagess) {
+      <ion-col size-xs="12" size-sm="12" size-md="12" size-lg="8" offset-lg="2">
+        <p-galleria
+          [value]="imagess"
+          [responsiveOptions]="responsiveOptions"
+          [containerStyle]="{ 'max-width': '100%' }"
+          [numVisible]="5">
+          <ng-template pTemplate="item" let-item>
+            <img [src]="item.url" style="width: 100%;" />
+          </ng-template>
+          <ng-template pTemplate="thumbnail" let-item>
+            <div class="grid grid-nogutter justify-content-center">
+              <img [src]="item.url" />
+            </div>
+          </ng-template>
+        </p-galleria>
+      </ion-col>
+      }
+    </ion-row>
+
+  </ion-grid>
+
+</ion-content>
