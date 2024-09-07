@@ -10,4 +10,5 @@ export const routes: Routes = [
   { path: 'profile', loadComponent: () => import('./components/profile/profile.component').then(m => m.ProfileComponent), canActivate: [AuthGuard] },
   { path: 'upload', loadComponent: () => import('./pages/upload-photos/upload-photos.component').then(m => m.ImageUploadComponent) },
   { path: 'create-qr-code', loadComponent: () => import('./pages/qrcode/qrcode.component').then(m => m.QrcodeComponent), canActivate: [AuthGuard] },
+  { path: 'gallery', loadComponent: () => import('./pages/gallery/gallery.component').then(m => m.GalleryComponent), canActivate: [AuthGuard] },
 ];

@@ -61,5 +61,9 @@ export class DashboardComponent implements OnInit {
   navigateToQRCode() {
     this.router.navigate(['/create-qr-code']);
   }
+
+  navigateToGallery() {
+    this.router.navigate(['/gallery']);
+  }
 }
 
